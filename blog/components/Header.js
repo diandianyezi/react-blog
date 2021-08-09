@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styles from './Header.module.scss'
 import { Row, Col, Menu } from 'antd'
 import { HomeOutlined, YoutubeOutlined, SmileOutlined } from '@ant-design/icons'
@@ -21,8 +21,10 @@ const Header = () => {
                             </Menu.Item>
                             <Menu.Item key="video">
                                 {/* <Icon type="youtube" /> */}
-                                <YoutubeOutlined />
-                                视频
+                                <a href="/MyList">
+                                    <YoutubeOutlined />
+                                    视频
+                                </a>
                             </Menu.Item>
                             <Menu.Item key="life">
                                 {/* <Icon type="smile" /> */}
