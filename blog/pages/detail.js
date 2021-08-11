@@ -11,10 +11,27 @@ import styles from '../styles/Detail.module.scss'
 import MarkNav from 'markdown-navbar';
 import axios from 'axios'
 import 'markdown-navbar/dist/navbar.css';
+import servicePath from '../config/apiUrl'
+import marked from 'marked'
+import highlight from 'highlight.js'
+import 'highlight.js/styles/monokai-sublime.css'
 
 const Detail = (res) => {
     const [detail, setDetail] = useState(res)
-    let markdown = detail.content
+    const renderer = new marked.Renderer()
+    marked.setOptions({
+        renderer: renderer,
+        gfm: true,
+        pedantic: false,
+        sanitize: false,
+        tables: true,
+        breaks: true,
+        smartLists: true,
+        highlight: function(code) {
+            return highlight.highlightAuto(code)
+        }
+    })
+    let html = marked(detail.content)
     return (
         <>
             <Head>
@@ -43,11 +60,13 @@ const Detail = (res) => {
                                 <span className={styles['icon']}><FireOutlined /> { detail.viewCount }人</span>
                             </div>
 
-                            <div className={styles["detailed-content"]} >
-                                <ReactMarkdown
+                            <div className={styles["detailed-content"]}
+                            dangerouslySetInnerHTML={{__html:html}}>
+                                {/* <ReactMarkdown
                                     children={markdown}
                                     skipHtml={false}
-                                />
+                                /> */}
+                                
                             </div>
                         </div>
 
@@ -62,7 +81,7 @@ const Detail = (res) => {
                             <div className={styles["nav-title"]}>文章目录</div>
                             <MarkNav
                                 className={styles["article-menu"]}
-                                source={markdown}
+                                source={html}
                                 ordered={false}
                             />
                         </div>
@@ -78,7 +97,7 @@ Detail.getInitialProps = async(context) => {
     const { id } = context.query
     console.info(id)
     const promise = new Promise((resolve) => {
-        axios('http://127.0.0.1:7001/default/getArticleById/' + id)
+        axios(servicePath.getArticleById + id)
         .then(res => {
             console.info('data', res.data.data[0])
             resolve(res.data.data[0])

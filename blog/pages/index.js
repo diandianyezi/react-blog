@@ -9,11 +9,27 @@ import Advert from '../components/Advert'
 import Footer from '../components/Footer'
 import styles from '../styles/Home.module.scss'
 import axios from 'axios'
+import servicePath from '../config/apiUrl';
+import marked from 'marked'
+import highlight from 'highlight.js'
+import 'highlight.js/styles/monokai-sublime.css'
 
 const Home = (list) => {
 
   const [myList, setMyList] = useState(list.data)
-
+  const renderer = new marked.Renderer()
+  marked.setOptions({
+      renderer: renderer,
+      gfm: true,
+      pedantic: false,
+      sanitize: false,
+      tables: true,
+      breaks: true,
+      smartLists: true,
+      highlight: function(code) {
+          return highlight.highlightAuto(code)
+      }
+  })
   return (
     <div>
       <Head>
@@ -52,11 +68,11 @@ const Home = (list) => {
                     </span>
                   </Space>
                 </div>
-                <div className={styles['list-context']}>{item.introduce}</div>
+                <div className={styles['list-context']}
+                dangerouslySetInnerHTML={{__html: marked(item.introduce)}}></div>
               </List.Item>
             )}
           >
-
           </List>
         </Col>
         <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
@@ -71,9 +87,8 @@ const Home = (list) => {
 
 Home.getInitialProps = async () => {
   const promise = new Promise((resolve) => {
-    axios('http://127.0.0.1:7001/default/getArticleList')
+    axios(servicePath.getArticleList)
       .then(res => {
-        console.info('--------', res.data);
         resolve(res.data)
       })
   })

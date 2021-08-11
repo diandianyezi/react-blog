@@ -47,6 +47,29 @@ class HomeController extends Controller {
       data: result,
     };
   }
+  // 得到类别名称和编号
+  async getTypeInfo() {
+    const result = await this.app.mysql.select('type');
+    this.ctx.body = { data: result };
+  }
+
+  async getArticleListByTypeId() {
+    const { id } = this.ctx.params;
+    const sql = `
+      SELECT article.id as id, 
+      article.title as title,
+      article.introduce as introduce,
+      FROM_UNIXTIME(article.create_time, '%Y-%m-%d %H:%m:%s') as createTime,
+      article.view_count as viewCount,
+      type.type_name as typeName
+      FROM article LEFT JOIN type ON article.type_id = type.id
+      WHERE type_id = ${id}
+    `;
+    const results = await this.app.mysql.query(sql);
+    this.ctx.body = {
+      data: results,
+    };
+  }
 }
 
 module.exports = HomeController;

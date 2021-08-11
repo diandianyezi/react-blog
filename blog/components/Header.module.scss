@@ -3,7 +3,7 @@
     // padding: 4rem;
     overflow: hidden;
     // height: 2.8rem;
-    line-height: 46px;
+    line-height: 44px;
     padding: 0 4rem;
     // border-bottom: 1px solid #ccc;
 
@@ -24,10 +24,10 @@
     // line-height: 2.6rem;
     &-horizontal {
         border: none;
-        line-height: 48px;
+        line-height: 46px;
+    }
+    .anticon {
+        margin-right: 10px;
     }
 }
 
-.anticon {
-    margin-right: 10px;
-}
