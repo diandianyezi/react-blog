@@ -3,11 +3,14 @@ import React from 'react';
 // import highligntjs from 'hightlight.js'
 import { Button, Input, Row, Col, Select, DatePicker, Space } from 'antd'
 import '../style/AddArticle.css'
+import axios from 'axios';
+import servicePath from '../config/apiUrl';
 
 const { Option } = Select
 const { TextArea } = Input
 
-function AddArticle() {
+function AddArticle(list) {
+    console.info(list)
     return (
         <Row gutter={5}>
             <Col span={18}>
@@ -62,4 +65,14 @@ function AddArticle() {
     )
 }
 
+AddArticle.getInitialPops = async () => {
+    const promise = new Promise(resolve => {
+        axios(servicePath.getTypes)
+        .then(res => {
+            console.info('ressss', res)
+        })
+    })
+
+    return await promise
+}
 export default AddArticle
