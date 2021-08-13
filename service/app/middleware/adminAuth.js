@@ -1,8 +1,8 @@
 'use strict';
 
-module.exports = () => {
+module.exports = options => {
   return async function adminAuth(ctx, next) {
-    console.info(ctx.session.openId);
+    console.info('sss', ctx.session.openId);
     if (ctx.session.openId) {
       await next();
     } else {

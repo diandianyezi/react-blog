@@ -46,6 +46,9 @@ function Login(props) {
             } else {
                 message.error('用户名密码错误!')
             }
+        }, error => {
+            message.error('登录出错了', error)
+            setIsLoading(false)
         })
     }
     return (

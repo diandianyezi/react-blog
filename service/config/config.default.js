@@ -33,8 +33,8 @@ module.exports = appInfo => {
       // username
       user: 'root',
       // password
-      // password: '19931017zt',
-      password: 'zhangting1993',
+      password: '19931017zt',
+      // password: 'zhangting1993',
       // database
       database: 'blog',
     },
@@ -52,7 +52,7 @@ module.exports = appInfo => {
   };
 
   config.cors = {
-    origin: 'http://localhost:3001',
+    origin: 'http://127.0.0.1:3000',
     credentials: true,
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   };

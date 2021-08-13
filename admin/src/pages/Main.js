@@ -8,7 +8,8 @@ function Main() {
     return (
         <Router>
             <Route path="/" exact component={Login} />
-            <Route path="/index/" exact component={AdminIndex} />
+            {/* 注意这里有子路由则父级不能加exact */}
+            <Route path="/index" component={AdminIndex} />
         </Router>
     )
 }
