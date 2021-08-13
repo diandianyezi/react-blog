@@ -16,7 +16,7 @@ const MyList = (list) => {
   const [myList, setMyList] = useState(list.data)
   useEffect(()=>{
     setMyList(list.data)
-   })
+   }, [])
   return (
     <div>
       <Head>
@@ -29,7 +29,7 @@ const MyList = (list) => {
         <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
           <div className={styles['bread-div']}>
             <Breadcrumb>
-              <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
+              <Breadcrumb.Item>首页</Breadcrumb.Item>
               <Breadcrumb.Item>视频教程</Breadcrumb.Item>
             </Breadcrumb>
           </div>

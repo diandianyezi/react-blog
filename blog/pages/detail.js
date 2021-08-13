@@ -43,7 +43,7 @@ const Detail = (res) => {
                     <div>
                         <div className={styles["bread-div"]}>
                             <Breadcrumb>
-                                <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
+                                <Breadcrumb.Item>首页</Breadcrumb.Item>
                                 <Breadcrumb.Item>视频列表</Breadcrumb.Item>
                                 <Breadcrumb.Item>{detail.title}</Breadcrumb.Item>
                             </Breadcrumb>
